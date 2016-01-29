@@ -79,9 +79,9 @@ The webserver of your choice must expose the configured webroot folder of the ho
 
 If you want to use [haproxy](http://www.haproxy.org/) we recommend to use our [haproxy-letsencrypt Docker image](https://github.com/bringnow/docker-haproxy-letsencrypt) for zero-downtime renewal and automatic reload on configuration/certificate changes.
 
-### Usage
+## Usage
 
-## Show installed domains/certificates
+### Show installed domains/certificates
 
 You can show the installed certificates by simply calling `letsencrypt-manager list`:
 
@@ -105,23 +105,23 @@ The `list` command shows a table with one row per certificate and four columns:
 3. The **absolute expiry date** of the certificate.
 4. The **relative expiry date** of the certificate in days.
 
-## Adding a new domain/certificate
+### Adding a new domain/certificate
 
 1. Ensure the [DNS]() configuration for the new domains is properly setup to point to the machine.
 2. Execute `letsencrypt-manager add <main domain name> [alternative domain names]...`
 
-## Configuring auto-renewal of certificates
+### Configuring auto-renewal of certificates
 
 TODO
 
-## Modify/renew an existing certificate
+### Modify/renew an existing certificate
 
 TODO
 
-## Removing a domain/certificate
+### Removing a domain/certificate
 
 TODO
 
-## Sync certificates, keys and configuration to a Git repository
+### Sync certificates, keys and configuration to a Git repository
 
 TODO
