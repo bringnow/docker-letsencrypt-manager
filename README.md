@@ -54,7 +54,7 @@ cron-auto-renewal - Run the cron job automatically renewing all certificates
 auto-renew        - Try to automatically renew all installed certificates
 ```
 
-As you can see, the `letsencrypt-manager` helper script automatically downloads the latest version of the docker image. If you want to disable updating on every execution, just pass the `--no-update-check` flag.
+As you can see, the `letsencrypt-manager` helper script automatically downloads the latest version of the docker image. If you want to disable updating on every execution, just pass the `--no-update-check` flag. For example `letsencrypt-manager --no-update-check help`.
 
 You can now proceed with the following sections.
 
@@ -65,7 +65,7 @@ Just change the environment variables in file `config.env`. Currently there are 
 * `LE_EMAIL`: Set the email-address used by letsencrypt. If not set, letsencrypt will ask for it interactively when requesting a certificate. (optional)
 * `LE_RSA_KEY_SIZE`: Set the RSA key size used by letsencrypt (optional).
 
-The `docker-compose.yml` config file already defines some docker host volumes. Of course you can change them easily. See [Compose file reference](https://docs.docker.com/compose/compose-file/#volumes-volume-driver) for syntax details.
+The `docker-compose.yml` config file already defines some docker host volumes. Of course you can change them easily. See [Compose file reference](https://docs.docker.com/compose/compose-file/#volumes-volume-driver) for syntax details. Notice that you need to change them twice, for the service *cli* and the service *cron*!
 
 #### Volumes
 
@@ -112,16 +112,33 @@ The `list` command shows a table with one row per certificate and four columns:
 
 ### Configuring auto-renewal of certificates
 
-TODO
+Starting the cronjob which automatically renews all installed certificate is actually quite simple, just execute the `update-cron.sh` script to update the docker image and (re)-creating the service:
+
+```
+root@example.com:/opt/docker-letsencrypt-manager # ./update-cron.sh
+Checking for newer docker image (pass --no-update-check to suppress this behavior)
+latest: Pulling from bringnow/letsencrypt-manager
+Digest: sha256:1bca6790d578309fad48ac81c30cae826a91a92d9c09660ca9d307ddc435d6c8
+Status: Image is up to date for bringnow/letsencrypt-manager:latest
+Creating dockerletsencryptmanager_cron_1...
+```
+
+The cronjob will check every day if any of the installed certificates expires in less than 4 weeks and will try to renew them. That was simple, wasn't it?
+
+If you want to manually start the auto-renewal, just call `letsencrypt-manager auto-renew`.
 
 ### Modify/renew an existing certificate
 
-TODO
+To modify the list of alternative domain names and/or manually renew a certificate you can run the `renew` command:
+
+```
+letsencrypt-manager renew <domain name> [alternative domain names]...
+```
 
 ### Removing a domain/certificate
 
-TODO
+Removing an domain from the host can be achieved by executing `letsencrypt-manager rm <domainname>`. This will remove all certificates and also auto-renewal configuration for this domain.
 
 ### Sync certificates, keys and configuration to a Git repository
 
-TODO
+If you want to backup the private keys and certificates (what you should do!) we recommend [https://github.com/bringnow/docker-git-sync](docker-git-sync). It will periodically listen for changes in the */etc/letsencrypt* folder and commit & push any changes to a Git repository of your choice. **Make sure to keep this Git repository in a safe place!**
