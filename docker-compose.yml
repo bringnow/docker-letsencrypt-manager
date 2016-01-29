@@ -9,6 +9,8 @@ cli:
 cron:
   image: bringnow/letsencrypt-manager:latest
   env_file: config.env
-  volumes_from:
-    - cli
+  volumes:
+    - /etc/letsencrypt:/etc/letsencrypt
+    - /var/lib/letsencrypt:/var/lib/letsencrypt
+    - /var/acme-webroot:/var/acme-webroot
   command: cron-auto-renewal
