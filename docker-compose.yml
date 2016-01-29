@@ -1,0 +1,20 @@
+cli:
+  image: bringnow/letsencrypt-manager:latest
+  environment:
+    - LE_EMAIL=
+    - LE_RSA_KEY_SIZE=4096
+  volumes:
+    - /etc/letsencrypt:/etc/letsencrypt
+    - /var/lib/letsencrypt:/var/lib/letsencrypt
+    - /var/acme-webroot:/var/acme-webroot
+
+cron:
+  image: bringnow/letsencrypt-manager:latest
+  environment:
+    - LE_EMAIL=
+    - LE_RSA_KEY_SIZE=4096
+  volumes:
+    - /etc/letsencrypt:/etc/letsencrypt
+    - /var/lib/letsencrypt:/var/lib/letsencrypt
+    - /var/acme-webroot:/var/acme-webroot
+  command: cron-auto-renewal

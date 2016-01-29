@@ -1,18 +1,20 @@
 #! /bin/bash
 
-if [ -z ${LE_EMAIL} ]; then
-  die "LE_EMAIL must be specified!"
+if [ -n ${LE_EMAIL} ]; then
+  LE_EXTRA_ARGS+=" --email ${LE_EMAIL}"
+fi
+
+if [ -n ${LE_RSA_KEY_SIZE} ]; then
+  LE_EXTRA_ARGS+=" --rsa-key-size ${LE_RSA_KEY_SIZE}"
 fi
 
 # Folders
 LE_CERT_ROOT="/etc/letsencrypt/live"
 LE_ARCHIVE_ROOT="/etc/letsencrypt/archive"
 LE_RENEWAL_CONFIG_ROOT="/etc/letsencrypt/renewal"
-LE_CMD="letsencrypt certonly --email ${LE_EMAIL}"
 
-if [ -n ${LE_EMAIL} ]; then
-  LE_CMD+=" --rsa-key-size ${LE_RSA_KEY_SIZE}"
-fi
+# The letsencrpt command line
+LE_CMD="letsencrypt certonly ${LE_EXTRA_ARGS}"
 
 function print_help {
   echo "Available commands:"
