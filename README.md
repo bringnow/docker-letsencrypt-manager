@@ -65,7 +65,7 @@ Just change the environment variables in file `config.env`. Currently there are 
 * `LE_EMAIL`: Set the email-address used by letsencrypt. If not set, letsencrypt will ask for it interactively when requesting a certificate. (optional)
 * `LE_RSA_KEY_SIZE`: Set the RSA key size used by letsencrypt (optional).
 
-The `docker-compose.yml` config file already defines some docker host volumes. Of course you can change them easily. See [Compose file reference](https://docs.docker.com/compose/compose-file/#volumes-volume-driver) for syntax details. Notice that you need to change them twice, for the service *cli* and the service *cron*!
+The `docker-compose.yml` config file already defines some docker host volumes. Of course you can change them easily. See [Compose file reference](https://docs.docker.com/compose/compose-file/#volumes-volume-driver) for syntax details. *Notice that you need to change them twice, for the services cli and cron!*
 
 #### Volumes
 
@@ -107,7 +107,7 @@ The `list` command shows a table with one row per certificate and four columns:
 
 ### Adding a new domain/certificate
 
-1. Ensure the [DNS]() configuration for the new domains is properly setup to point to the machine.
+1. Ensure the DNS configuration for the new domains is properly setup to point to the machine.
 2. Execute `letsencrypt-manager add <main domain name> [alternative domain names]...`
 
 ### Configuring auto-renewal of certificates
@@ -141,4 +141,4 @@ Removing an domain from the host can be achieved by executing `letsencrypt-manag
 
 ### Sync certificates, keys and configuration to a Git repository
 
-If you want to backup the private keys and certificates (what you should do!) we recommend [https://github.com/bringnow/docker-git-sync](docker-git-sync). It will periodically listen for changes in the */etc/letsencrypt* folder and commit & push any changes to a Git repository of your choice. **Make sure to keep this Git repository in a safe place!**
+If you want to backup the private keys and certificates (what you should do!) we recommend [docker-git-sync](https://github.com/bringnow/docker-git-sync). It will periodically listen for changes in the */etc/letsencrypt* folder and commit & push any changes to a Git repository of your choice. **Make sure to keep this Git repository in a safe place!**
