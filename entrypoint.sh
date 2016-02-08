@@ -1,10 +1,10 @@
 #! /bin/bash
 
-if [ -n ${LE_EMAIL} ]; then
+if [ -n "${LE_EMAIL}" ]; then
   LE_EXTRA_ARGS+=" --email ${LE_EMAIL}"
 fi
 
-if [ -n ${LE_RSA_KEY_SIZE} ]; then
+if [ -n "${LE_RSA_KEY_SIZE}" ]; then
   LE_EXTRA_ARGS+=" --rsa-key-size ${LE_RSA_KEY_SIZE}"
 fi
 
