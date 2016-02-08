@@ -15,7 +15,7 @@ If you install a machine which should be able to request and automatically renew
 ```
 3. Add an alias for letsencrypt-manager (optionally):
 ```
-# echo alias letsencrypt-manager=\'/opt/docker-letsencrypt-manager/letsencrypt-manager\' >> ~/.bash_aliases && source ~/.bashrc
+# echo alias letsencrypt-manager=\'/opt/docker-letsencrypt-manager/letsencrypt-manager\' >> ~/.bashrc && source ~/.bashrc
 ```
 4. The command `letsencrypt-manager` is now ready for usage. Type `letsencrypt-manager help` for a list of available commands:
 ```
