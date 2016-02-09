@@ -129,7 +129,7 @@ function auto_renew {
           domains="${domains} ${name}"
         fi
       done
-      renew "${domains}"
+      renew ${domains}
       if [ $? -ne 0 ]
       then
         log_error "failed to renew certificate for ${subject}!"
