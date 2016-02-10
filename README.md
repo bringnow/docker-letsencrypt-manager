@@ -13,7 +13,7 @@ If you install a machine which should be able to request and automatically renew
 ```
 # cd /opt/ && git clone https://github.com/bringnow/docker-letsencrypt-manager.git && cd docker-letsencrypt-manager
 ```
-3. Add an alias for letsencrypt-manager (optionally):
+3. Add an alias for letsencrypt-manager (optional):
 ```
 # echo alias letsencrypt-manager=\'/opt/docker-letsencrypt-manager/letsencrypt-manager\' >> ~/.bashrc && source ~/.bashrc
 ```
