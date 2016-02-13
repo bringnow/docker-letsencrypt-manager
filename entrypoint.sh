@@ -26,6 +26,7 @@ function print_help {
   echo "remove            - Remove and existing domain and its certificate"
   echo "cron-auto-renewal - Run the cron job automatically renewing all certificates"
   echo "auto-renew        - Try to automatically renew all installed certificates"
+  echo "print-pin         - Print the public key pin for a given domain for usage with HPKP"
 }
 
 function add {
@@ -159,6 +160,29 @@ function list {
   echo -e $OUTPUT | column -t -s '@'
 }
 
+function print_pin {
+  if [ $# -lt 1 ]
+  then
+  	echo 'Usage: print-pin <domain name>'
+  	exit -1
+  fi
+
+  DOMAINNAME="${1}"
+  DOMAIN_FOLDER="${LE_CERT_ROOT}/${DOMAINNAME}"
+
+  if [ ! -d "${DOMAIN_FOLDER}" ]; then
+    log_error "Domain ${DOMAINNAME} does not exist!"
+    exit 6
+  fi
+
+  pin_sha256=$(openssl rsa -in "${DOMAIN_FOLDER}/privkey.pem" -outform der -pubout | openssl dgst -sha256 -binary | openssl enc -base64)
+
+  echo "pin-sha256: ${pin_sha256}"
+  echo "Example usage in HTTP header:"
+  echo "Public-Key-Pins: pin-sha256="${pin_sha256}"; max-age=5184000; includeSubdomains;"
+  echo "CAUTION: Make sure to also add another pin for a backup key!"
+}
+
 function remove {
   if [ $# -lt 1 ]
   then
@@ -228,6 +252,8 @@ elif [ "${CMD}" = "help" ]; then
   print_help "${@}"
 elif [ "${CMD}" = "cron-auto-renewal" ]; then
   cron && tail -f /var/log/cron.log
+elif [ "${CMD}" = "print-pin" ]; then
+  print_pin "${@}"
 else
   die "Unknown command ${CMD}"
 fi
