@@ -175,11 +175,14 @@ function print_pin {
     exit 6
   fi
 
-  pin_sha256=$(openssl rsa -in "${DOMAIN_FOLDER}/privkey.pem" -outform der -pubout | openssl dgst -sha256 -binary | openssl enc -base64)
+  pin_sha256=$(openssl rsa -in "${DOMAIN_FOLDER}/privkey.pem" -outform der -pubout 2> /dev/null | openssl dgst -sha256 -binary | openssl enc -base64)
 
+  echo
   echo "pin-sha256: ${pin_sha256}"
+  echo
   echo "Example usage in HTTP header:"
   echo "Public-Key-Pins: pin-sha256="${pin_sha256}"; max-age=5184000; includeSubdomains;"
+  echo
   echo "CAUTION: Make sure to also add another pin for a backup key!"
 }
 
