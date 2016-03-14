@@ -79,6 +79,8 @@ The webserver of your choice must expose the configured webroot folder of the ho
 
 If you want to use [haproxy](http://www.haproxy.org/) we recommend to use our [haproxy-letsencrypt Docker image](https://github.com/bringnow/docker-haproxy-letsencrypt) for zero-downtime renewal and automatic reload on configuration/certificate changes.
 
+If you want to use [nginx](http://nginx.org/) we recommend to use our [nginx-letsencrypt Docker image](https://github.com/bringnow/docker-nginx-letsencrypt) for zero-downtime renewal and automatic reload on configuration/certificate changes.
+
 ## Usage
 
 ### Show installed domains/certificates
