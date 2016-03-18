@@ -95,7 +95,7 @@ function renew {
   LE_RESULT=$?
 
   if [ ${LE_RESULT} -ne 0 ]; then
-   >&2 echo "letsencrypt returned error cpde ${LE_RESULT}"
+   >&2 echo "letsencrypt returned error code ${LE_RESULT}"
    return ${LE_RESULT}
   fi
 
