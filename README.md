@@ -149,4 +149,4 @@ If you want to backup the private keys and certificates (what you should do!) we
 
 ### tail: unrecognized file system type 0x794c7630 for '/var/log/cron.log
 
-Please update your letsencrypt-manager docker image and recreate your container(s), see https://github.com/bringnow/docker-letsencrypt-manager/issues/2.
+Please update your letsencrypt-manager docker image and recreate your container(s), see [bug report](https://github.com/bringnow/docker-letsencrypt-manager/issues/2).
