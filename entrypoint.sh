@@ -254,7 +254,7 @@ elif [ "${CMD}" = "auto-renew" ]; then
 elif [ "${CMD}" = "help" ]; then
   print_help "${@}"
 elif [ "${CMD}" = "cron-auto-renewal" ]; then
-  cron && tail -f /var/log/cron.log
+  touch /var/log/cron.log && cron && tail -f /var/log/cron.log
 elif [ "${CMD}" = "print-pin" ]; then
   print_pin "${@}"
 else

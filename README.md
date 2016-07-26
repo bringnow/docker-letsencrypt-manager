@@ -144,3 +144,9 @@ Removing an domain from the host can be achieved by executing `letsencrypt-manag
 ### Sync certificates, keys and configuration to a Git repository
 
 If you want to backup the private keys and certificates (what you should do!) we recommend [docker-git-sync](https://github.com/bringnow/docker-git-sync). It will periodically listen for changes in the */etc/letsencrypt* folder and commit & push any changes to a Git repository of your choice. **Make sure to keep this Git repository in a safe place!**
+
+## Troubleshooting
+
+### tail: unrecognized file system type 0x794c7630 for '/var/log/cron.log
+
+Please update your letsencrypt-manager docker image and recreate your container(s), see https://github.com/bringnow/docker-letsencrypt-manager/issues/2.
