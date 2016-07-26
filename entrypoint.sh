@@ -14,7 +14,7 @@ LE_ARCHIVE_ROOT="/etc/letsencrypt/archive"
 LE_RENEWAL_CONFIG_ROOT="/etc/letsencrypt/renewal"
 
 # The letsencrpt command line
-LE_CMD="/opt/letsencrypt/venv/bin/letsencrypt certonly ${LE_EXTRA_ARGS}"
+LE_CMD="/opt/certbot/venv/bin/certbot certonly ${LE_EXTRA_ARGS}"
 
 function print_help {
   echo "Available commands:"
