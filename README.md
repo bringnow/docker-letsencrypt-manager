@@ -153,4 +153,5 @@ Please update your letsencrypt-manager docker image and recreate your container(
 
 ### Other issue
 
-Please have a look at the [existing issues](https://github.com/bringnow/docker-letsencrypt-manager/issues) or [report a new one]((https://github.com/bringnow/docker-letsencrypt-manager/issues/new)).
+Please have a look at the [existing issues](https://github.com/bringnow/docker-letsencrypt-manager/issues) or
+[report a new one](https://github.com/bringnow/docker-letsencrypt-manager/issues/new).
