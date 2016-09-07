@@ -110,7 +110,10 @@ The `list` command shows a table with one row per certificate and four columns:
 ### Adding a new domain/certificate
 
 1. Ensure the DNS configuration for the new domains is properly setup to point to the machine.
-2. Execute `letsencrypt-manager add <main domain name> [alternative domain names]...`
+2. If you do not have a valid SSL certificate for the domain(s) you want to add,
+   just run the ACME enabled webserver without any https configuration (so only port 80).
+3. Execute `letsencrypt-manager add <main domain name> [alternative domain names]...`
+4. If not previously present, add the https configuration for the added domain(s) to your web server configuration.
 
 ### Configuring auto-renewal of certificates
 
