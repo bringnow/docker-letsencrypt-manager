@@ -113,7 +113,7 @@ function renew {
 # check certificate expiration and run certificate issue requests
 # for those that expire in under 4 weeks
 function auto_renew {
-
+  echo "Executing auto renew at $(date -R)"
   renewed_certs=()
   exitcode=0
   while IFS= read -r -d '' cert; do
@@ -254,6 +254,11 @@ elif [ "${CMD}" = "auto-renew" ]; then
 elif [ "${CMD}" = "help" ]; then
   print_help "${@}"
 elif [ "${CMD}" = "cron-auto-renewal" ]; then
+  # CRON_TIME can be set via environment
+  # If not defined, the default is daily
+  CRON_TIME=${CRON_TIME:-@daily}
+  echo "Running cron job with execution time ${CRON_TIME}"
+  echo "${CRON_TIME} root /usr/local/bin/entrypoint.sh auto-renew >> /var/log/cron.log 2>&1" > /etc/cron.d/letsencrypt
   touch /var/log/cron.log && cron && tail -f /var/log/cron.log
 elif [ "${CMD}" = "print-pin" ]; then
   print_pin "${@}"

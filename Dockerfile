@@ -13,10 +13,7 @@ VOLUME /var/acme-webroot
 VOLUME /var/log/
 
 # Install runtime dependency
-RUN apt-get update && apt-get install -y bsdmainutils --no-install-recommends
-
-# Add crontab file in the cron directory
-COPY crontab /etc/cron.d/letsencrypt
+RUN export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get install -y bsdmainutils --no-install-recommends
 
 # Copy executables
 COPY entrypoint.sh /usr/local/bin/
@@ -25,7 +22,7 @@ COPY entrypoint.sh /usr/local/bin/
 COPY cli.ini /root/.config/letsencrypt/
 
 # Give execution rights to scripts
-RUN chmod 0744 /etc/cron.d/letsencrypt /usr/local/bin/*
+RUN chmod 0744 /usr/local/bin/*
 
 ENTRYPOINT [ "entrypoint.sh" ]
 
