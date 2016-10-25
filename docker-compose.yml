@@ -14,3 +14,4 @@ cron:
     - /var/lib/letsencrypt:/var/lib/letsencrypt
     - /var/acme-webroot:/var/acme-webroot
   command: cron-auto-renewal
+  restart: always
