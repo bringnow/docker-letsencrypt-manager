@@ -32,8 +32,8 @@ function print_help {
 function add {
   if [ $# -lt 1 ]
   then
-  	echo 'Usage: add <domain name> <alternative domain name>...'
-  	exit -1
+    echo 'Usage: add <domain name> <alternative domain name>...'
+    exit -1
   fi
 
   DOMAINNAME="${1}"
@@ -58,7 +58,8 @@ function add {
   # Concat the certificate chain and private key to a PEM file suitable for HAProxy
   cat "${DOMAIN_FOLDER}/privkey.pem" \
    "${DOMAIN_FOLDER}/fullchain.pem" \
-   > "${DOMAIN_FOLDER}/haproxy.pem"
+   > "/tmp/haproxy.pem"
+   mv "/tmp/haproxy.pem" "${DOMAIN_FOLDER}/haproxy.pem"
 
   if [ $? -ne 0 ]; then
    >&2 echo "failed to create haproxy.pem file!"
@@ -69,8 +70,8 @@ function add {
 function renew {
   if [ $# -lt 1 ]
   then
-  	echo 'Usage: renew <domain name> <alternative domain name>...'
-  	exit -1
+    echo 'Usage: renew <domain name> <alternative domain name>...'
+    exit -1
   fi
 
   DOMAINNAME="${1}"
@@ -102,7 +103,8 @@ function renew {
   # Concat the certificate chain and private key to a PEM file suitable for HAProxy
   cat "${DOMAIN_FOLDER}/privkey.pem" \
    "${DOMAIN_FOLDER}/fullchain.pem" \
-   > "${DOMAIN_FOLDER}/haproxy.pem"
+   > "/tmp/haproxy.pem"
+   mv "/tmp/haproxy.pem" "${DOMAIN_FOLDER}/haproxy.pem"
 
   if [ $? -ne 0 ]; then
    >&2 echo "failed to create haproxy.pem file!"
@@ -163,8 +165,8 @@ function list {
 function print_pin {
   if [ $# -lt 1 ]
   then
-  	echo 'Usage: print-pin <domain name>'
-  	exit -1
+    echo 'Usage: print-pin <domain name>'
+    exit -1
   fi
 
   DOMAINNAME="${1}"
@@ -189,8 +191,8 @@ function print_pin {
 function remove {
   if [ $# -lt 1 ]
   then
-  	echo 'Usage: remove <domain name>'
-  	exit -1
+    echo 'Usage: remove <domain name>'
+    exit -1
   fi
 
   DOMAINNAME=$1
@@ -234,8 +236,8 @@ function die {
 
 if [ $# -eq 0 ]
 then
-	print_help
-	exit 0
+  print_help
+  exit 0
 fi
 
 CMD="${1}"
