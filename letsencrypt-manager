@@ -2,12 +2,23 @@
 
 cd "$(dirname "$0")"
 
-if [ "$1" != "--no-update-check" ]; then
-  echo "Checking for newer docker image (pass --no-update-check to suppress this behavior)"
-  docker-compose pull cli
-else
+CHECK_UPDATE_AFTER=86400 # one day
+LAST_UPDATE_TIMESTAMP_FILE=".last-update-check"
+
+if [ ! -f ${LAST_UPDATE_TIMESTAMP_FILE} ];
+  then echo 0 > ${LAST_UPDATE_TIMESTAMP_FILE}
+fi
+
+LAST_UPDATE_TIMESTAMP=$(<${LAST_UPDATE_TIMESTAMP_FILE})
+NOW=$(date +%s)
+DIFF=$((${NOW} - ${LAST_UPDATE_TIMESTAMP}))
+
+if [ "$1" == "--no-update-check" ]; then
   echo "Not checking for newer docker image because --no-update-check specified."
   shift
+elif [ ${DIFF} -gt ${CHECK_UPDATE_AFTER} ]; then
+  echo "Checking for newer docker image (pass --no-update-check to suppress this behavior)"
+  docker-compose pull cli && echo ${NOW} > .last-update-check
 fi
 
 docker-compose run --rm cli ${@}
