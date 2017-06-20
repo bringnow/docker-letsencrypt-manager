@@ -8,6 +8,14 @@ if [ -n "${LE_RSA_KEY_SIZE}" ]; then
   LE_EXTRA_ARGS+=" --rsa-key-size ${LE_RSA_KEY_SIZE}"
 fi
 
+if [ -n "${LE_PRE_HOOK}" ]; then
+  LE_EXTRA_ARGS+=" --pre-hook \"${LE_PRE_HOOK}\""
+fi
+
+if [ -n "${LE_POST_HOOK}" ]; then
+  LE_EXTRA_ARGS+=" --post-hook \"${LE_POST_HOOK}\""
+fi
+
 # Folders
 LE_CERT_ROOT="/etc/letsencrypt/live"
 LE_ARCHIVE_ROOT="/etc/letsencrypt/archive"
@@ -53,7 +61,7 @@ function add {
     fi
   done
 
-  ${LE_CMD} ${DOMAIN_ARGS} || die "Failed to issue certificate "
+  eval ${LE_CMD} ${DOMAIN_ARGS} || die "Failed to issue certificate "
 
   # Concat the certificate chain and private key to a PEM file suitable for HAProxy
   cat "${DOMAIN_FOLDER}/privkey.pem" \
@@ -91,7 +99,7 @@ function renew {
     fi
   done
 
-  ${LE_CMD} --renew-by-default ${DOMAIN_ARGS}
+  eval ${LE_CMD} --renew-by-default ${DOMAIN_ARGS}
 
   LE_RESULT=$?
 

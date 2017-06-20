@@ -65,6 +65,8 @@ Just define the following environment variables in a file `.env`:
 * `LE_EMAIL`: Set the email-address used by letsencrypt. If not set, letsencrypt will ask for it interactively when requesting a certificate. (optional)
 * `LE_RSA_KEY_SIZE`: Set the RSA key size used by letsencrypt (optional, defaults to the default setting of letsencrypt).
 * `CRON_TIME`: The execution time of the renewal cronjob. For the syntax check [CronHowto](https://help.ubuntu.com/community/CronHowto). Default is every day (`@daily`).
+* `LE_PRE_HOOK`: Set the hook command for running before a certificate is renewed.
+* `LE_POST_HOOK`: Set the hook command for running after a certificate is renewed.
 
 The `docker-compose.yml` config file already defines some docker host volumes. Of course you can change them easily. See [Compose file reference](https://docs.docker.com/compose/compose-file/#volumes-volume-driver) for syntax details. *Notice that you need to change them twice, for the services cli and cron!*
 
