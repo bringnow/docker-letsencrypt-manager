@@ -255,7 +255,7 @@ if [ "${CMD}" = "add"  ]; then
   add "${@}"
 elif [ "${CMD}" = "list" ]; then
   list "${@}"
-elif [ "${CMD}" = "remove" ]; then
+elif [ "${CMD}" = "remove" ] || [ "${CMD}" = "rm" ]; then
   remove "${@}"
 elif [ "${CMD}" = "renew" ]; then
   renew "${@}"
