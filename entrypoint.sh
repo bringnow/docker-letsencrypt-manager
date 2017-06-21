@@ -164,8 +164,7 @@ function list {
     remaining_days=$(( ($enddate - $now) / 60 / 60 / 24 ))
     subject="$(openssl x509 -noout -subject -in "${cert}" | grep -o -E 'CN=[^ ,]+' | tr -d 'CN=')"
     subjectaltnames="$(openssl x509 -noout -text -in "${cert}" | sed -n '/X509v3 Subject Alternative Name/{n;p}' | sed 's/\s//g' | tr -d 'DNS:' | sed 's/,/ /g')"
-    altnames="${subjectaltnames/ ${subject} / }"
-    OUTPUT+="${subject}@${altnames}@${enddate_str}@${remaining_days}\n"
+    OUTPUT+="${subject}@${subjectaltnames}@${enddate_str}@${remaining_days}\n"
   done < <(find ${LE_CERT_ROOT} -name cert.pem -print0)
 
   echo -e $OUTPUT | column -t -s '@'
