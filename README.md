@@ -67,6 +67,7 @@ Just define the following environment variables in a file `.env`:
 * `CRON_TIME`: The execution time of the renewal cronjob. For the syntax check [CronHowto](https://help.ubuntu.com/community/CronHowto). Default is every day (`@daily`).
 * `LE_PRE_HOOK`: Set the hook command for running before a certificate is renewed.
 * `LE_POST_HOOK`: Set the hook command for running after a certificate is renewed.
+* `AUTO_RENEW_CHECK_SUCCESS_URL`: A URL to send a GET request to after a successful auto renew check (optional). This can be used to get notified if the job fails through a service like healthchecks.io or Dead Man's Snitch.
 
 The `docker-compose.yml` config file already defines some docker host volumes. Of course you can change them easily. See [Compose file reference](https://docs.docker.com/compose/compose-file/#volumes-volume-driver) for syntax details. *Notice that you need to change them twice, for the services cli and cron!*
 

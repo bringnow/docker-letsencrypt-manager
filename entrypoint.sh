@@ -153,6 +153,10 @@ function auto_renew {
       log_info "Certificate for ${DOMAINNAME} does not require renewal."
     fi
   done < <(find ${LE_CERT_ROOT} -name cert.pem -print0)
+
+  if [ -n "${AUTO_RENEW_CHECK_SUCCESS_URL}" ] && [ "$exitcode" -eq 0 ]; then
+    curl -s "${AUTO_RENEW_CHECK_SUCCESS_URL}" > /dev/null
+  fi
 }
 
 function list {

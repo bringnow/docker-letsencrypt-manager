@@ -13,7 +13,7 @@ VOLUME /var/acme-webroot
 VOLUME /var/log/
 
 # Install runtime dependency
-RUN export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get install -y bsdmainutils --no-install-recommends
+RUN export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get install -y bsdmainutils curl --no-install-recommends
 
 # Copy executables
 COPY entrypoint.sh /usr/local/bin/
