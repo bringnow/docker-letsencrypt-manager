@@ -10,8 +10,8 @@ VOLUME /var/acme-webroot
 # when using docker with overlay storage driver.
 VOLUME /var/log/
 
-# Install runtime dependency column (in util-linux) and curl
-RUN apk add --update util-linux
+# Install runtime dependency column (in util-linux), curl and bash
+RUN apk add --update util-linux curl bash
 
 # Copy executables
 COPY entrypoint.sh /usr/local/bin/
