@@ -1,6 +1,4 @@
-FROM quay.io/letsencrypt/letsencrypt:latest
-
-MAINTAINER Fabian Köster <fabian.koester@bringnow.com>
+FROM certbot/certbot:latest
 
 # This holds the webroot required for ACME authentication
 VOLUME /var/acme-webroot
@@ -12,8 +10,8 @@ VOLUME /var/acme-webroot
 # when using docker with overlay storage driver.
 VOLUME /var/log/
 
-# Install runtime dependency
-RUN export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get install -y bsdmainutils curl --no-install-recommends
+# Install runtime dependency column (in util-linux) and curl
+RUN apk add --update util-linux
 
 # Copy executables
 COPY entrypoint.sh /usr/local/bin/
