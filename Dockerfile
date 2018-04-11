@@ -16,9 +16,6 @@ RUN apk add --update util-linux
 # Copy executables
 COPY entrypoint.sh /usr/local/bin/
 
-# Copy letsencrypt configuration file
-COPY cli.ini /root/.config/letsencrypt/
-
 # Give execution rights to scripts
 RUN chmod 0744 /usr/local/bin/*
 

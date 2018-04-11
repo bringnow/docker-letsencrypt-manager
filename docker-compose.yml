@@ -6,6 +6,7 @@ services:
       - /etc/letsencrypt:/etc/letsencrypt
       - /var/lib/letsencrypt:/var/lib/letsencrypt
       - /var/acme-webroot:/var/acme-webroot
+      - ./cli.ini:/root/.config/letsencrypt/cli.ini
 
   cron:
     image: bringnow/letsencrypt-manager:latest
@@ -13,5 +14,6 @@ services:
       - /etc/letsencrypt:/etc/letsencrypt
       - /var/lib/letsencrypt:/var/lib/letsencrypt
       - /var/acme-webroot:/var/acme-webroot
+      - ./cli.ini:/root/.config/letsencrypt/cli.ini
     command: cron-auto-renewal
     restart: always
